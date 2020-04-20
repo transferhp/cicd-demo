@@ -1,0 +1,20 @@
+version: '3.2'
+services:
+  hello_world_web_application:
+    build:
+      context: hello_world_web_application/
+    ports:
+      - 1000:1000
+    container_name: hello_world_web_application
+  jenkins:
+    build:
+      context: jenkins-docker/
+    privileged: true
+    user: root
+    ports:
+      - 8080:8080
+      - 50000:50000
+    container_name: jenkins
+    volumes:
+      - /Users/penghao/jenkins:/var/jenkins_home #Remember that, the tmp directory is designed to be wiped on system reboot.
+      - /var/run/docker.sock:/var/run/docker.sock
